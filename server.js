@@ -1,5 +1,6 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const indexRouter = require("./routes/index");
 
 const app = express();
 const PORT = 5006;
@@ -16,13 +17,16 @@ app.use(expressLayouts);
 app.set('layout','./layouts/index.ejs');
 app.set('view engine', 'ejs');
 
-app.get("/", (req, res) => {
-    console.log("ok");
-    //どのpathのファイルにレンダリングするかpathで指定.ejs拡張子無し。
-    res.render('./layouts/index',{
-        title: 'ホームページ',
-        layout: './layouts/index',
-    });
-})
+// app.get("/", (req, res) => {
+//     console.log("ok");
+//     //どのpathのファイルにレンダリングするかpathで指定.ejs拡張子無し。
+//     res.render('./layouts/index',{
+//         title: 'ホームページ',
+//         msg: 'ECC Asahigaoka-School12355',
+//         layout: './layouts/index',
+//     });
+// })
+
+app.use("/",indexRouter);
 
 app.listen(PORT, () => console.log(`App lisetn on port ${PORT}`));
